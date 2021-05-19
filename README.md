@@ -3,6 +3,7 @@
 This repository contains files:
 <ul>
 <li>jupyter notebook with exploratory data analysis - EDA for regression.ipynb;</li>
+<li>Profile report - profile_summary.html;</li>
 <li>code for modeling - regression_model.py;</li>
 <li>file with model predictions - predictions.csv;</li>
 <li>requirements.txt file.</li>
