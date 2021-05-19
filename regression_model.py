@@ -23,7 +23,6 @@ regressor.fit(X_train, y_train)
 # Evaluate model with 5-fold cross-validation to avoid overfitting
 cv_results = cross_val_score(regressor, X_train, y_train, cv=5, scoring='neg_root_mean_squared_error')
 
-
 # Evaluate the model on train and test set
 y_pred_train = regressor.predict(X_train)
 y_pred_test = regressor.predict(X_test)
@@ -37,8 +36,4 @@ print("RMSE for test data:"+str(rmse_test))
 # Generate and save predictions for internship_hidden_test.csv
 predictions = regressor.predict(test.values)
 np.savetxt("predictions.csv", predictions, delimiter=",")
-
-
-
-
 
