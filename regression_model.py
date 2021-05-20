@@ -10,7 +10,7 @@ data = pd.read_csv('internship_train.csv')
 test = pd.read_csv('internship_hidden_test.csv')
 
 # Divide data into features and target
-X = data.iloc[:, :-1].values
+X = data.iloc[:, 6].values
 y = data.iloc[:, -1].values
 
 # Divide data set for train and test
@@ -18,14 +18,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Build and fit the model
 regressor = DecisionTreeRegressor()
-regressor.fit(X_train, y_train)
+regressor.fit(X_train.reshape(-1, 1), y_train)
 
 # Evaluate model with 5-fold cross-validation to avoid overfitting
-cv_results = cross_val_score(regressor, X_train, y_train, cv=5, scoring='neg_root_mean_squared_error')
+cv_results = cross_val_score(regressor, X_train.reshape(-1, 1), y_train, cv=5, scoring='neg_root_mean_squared_error')
 
 # Evaluate the model on train and test set
-y_pred_train = regressor.predict(X_train)
-y_pred_test = regressor.predict(X_test)
+y_pred_train = regressor.predict(X_train.reshape(-1, 1))
+y_pred_test = regressor.predict(X_test.reshape(-1, 1))
 rmse_train = np.sqrt(mean_squared_error(y_train, y_pred_train))
 rmse_test = np.sqrt(mean_squared_error(y_test, y_pred_test))
 
@@ -34,6 +34,6 @@ print("RMSE for train data:"+str(rmse_train))
 print("RMSE for test data:"+str(rmse_test))
 
 # Generate and save predictions for internship_hidden_test.csv
-predictions = regressor.predict(test.values)
+predictions = regressor.predict(test.values[6].reshape(-1, 1))
 np.savetxt("predictions.csv", predictions, delimiter=",")
 
