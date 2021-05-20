@@ -34,6 +34,6 @@ print("RMSE for train data:"+str(rmse_train))
 print("RMSE for test data:"+str(rmse_test))
 
 # Generate and save predictions for internship_hidden_test.csv
-predictions = regressor.predict(test.values[6].reshape(-1, 1))
+predictions = regressor.predict(test.iloc[:, 6].values.reshape(-1, 1))
 np.savetxt("predictions.csv", predictions, delimiter=",")
 
